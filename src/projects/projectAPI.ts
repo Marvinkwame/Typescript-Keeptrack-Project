@@ -73,12 +73,18 @@ const projectAPI = {
     .then(checkStatus)
     .then(parseJSON)
     .catch((error: TypeError) => {
-        console.log('Log client error ' + error)
+        console.log('Log client error ' + error);
         throw new Error(
             'There was an error updating the project. Please try again.'
-        )
+        );
     })
-  }
+  },
+  find(id: number): Promise<Project> {
+    return fetch(`${url}/${id}`)
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(convertToProjectModel)
+  },
 };
 
 export { projectAPI };
